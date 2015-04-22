@@ -1,0 +1,23 @@
+{
+  "name": "user-profile-mongo",
+  "version": "1.0.0",
+  "description": "使用MongoDB保存用户信息",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nagucc/user-profile-mongo.git"
+  },
+  "author": "na57@qq.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nagucc/user-profile-mongo/issues"
+  },
+  "homepage": "https://github.com/nagucc/user-profile-mongo",
+  "dependencies": {
+    "mongodb": "^1.4.31",
+    "node-uuid": "^1.4.2"
+  }
+}
