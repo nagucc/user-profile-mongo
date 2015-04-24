@@ -53,6 +53,36 @@ module.exports = function(dbconn, collection) {
                     }
                 });
             });
+        },
+        getOrCreateUser: function (userCredential, callback) {
+            MongoClient.connect(dbconn, function (err, db) {
+                var profiles = db.collection(collection);
+                profiles.find(userCredential).toArray(function (err, docs) {
+                    db.close();
+                    if(err){
+                        callback(err);
+                        db.close();
+                        return;
+                    }
+                    if(docs.length > 1){                         // 找到多个
+                        callback('给定的条件不能唯一确定一个用户');
+                        db.close();
+                    } else if(docs.length === 0){                       // 没找到，创建新的
+                        profiles.insert(userCredential, function(err, doc){
+                            db.close();
+                            if(err){
+                                callback(err);
+                                return;
+                            }
+                            callback(null, doc);
+                        });
+                    } else {                                            // 找到
+                        callback(null, docs[0]);
+                        db.close();
+                    }
+                });
+            });
         }
+
     };
 };
